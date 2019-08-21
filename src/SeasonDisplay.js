@@ -1,7 +1,9 @@
 import React from 'react';
 
-const SeasonDisplay = () => {
-  return <div>Season Display</div>
-};
+class SeasonDisplay extends React.Component {
+  render() {
+    return <div>Season Display</div>
+  }
+}
 
 export default SeasonDisplay;
