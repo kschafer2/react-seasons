@@ -4,14 +4,10 @@ import SeasonDisplay from './SeasonDisplay';
 
 //must extend React.Component
 class App extends React.Component {
-  constructor(props) {
-    // must be called
-    super(props);
+  // initialize state with object
+  state = { latitude: null, errorMessage: '' };
 
-    // initialize state with object
-    this.state = { latitude: null, errorMessage: '' };
-  }
-
+  // good place to load data
   componentDidMount() {
     // get user location
     // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
