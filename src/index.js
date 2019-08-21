@@ -9,7 +9,7 @@ class App extends React.Component {
     super(props);
 
     //initialize state with object
-    this.state = { latitude: null };
+    this.state = { latitude: null, errorMessage: '' };
 
     //get user location
     // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
@@ -22,13 +22,26 @@ class App extends React.Component {
         this.setState({ latitude: position.coords.latitude });
       },
       //on failure
-      (err) => console.log(err)
+      (err) => {
+        this.setState({ errorMessage: err.message });
+      }
     );
   }
 
   //render must be defined in React class
   render() {
-    return <div>Latitude: {this.state.latitude}</div>
+    var lat = this.state.latitude;
+    var error = this.state.errorMessage;
+
+    if(!lat && error) {
+      return <div>Error: {error}</div>
+    }
+
+    if(lat && !error) {
+      return <div>Latitude: {lat}</div>
+    }
+
+    return <div>Loading...</div>
   }
 }
 
