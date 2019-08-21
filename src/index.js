@@ -22,21 +22,25 @@ class App extends React.Component {
     );
   }
 
-  // render must be defined in React class
-  render() {
+  renderContent() {
     const lat = this.state.lat;
     const err = this.state.error;
 
     if(!lat && err) {
-      return <div>Error: {err}</div>
+      return <div>Error: {err}</div>;
     }
 
     if(lat && !err) {
       // passing state as a prop changes child state, too
-      return <SeasonDisplay lat={lat} />
+      return <SeasonDisplay lat={lat} />;
     }
 
     return <Spinner message="Please accept location request"/>;
+  }
+
+  // render must be defined in React class
+  render() {
+    return this.renderContent();
   }
 }
 
