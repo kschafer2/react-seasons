@@ -5,7 +5,7 @@ import SeasonDisplay from './SeasonDisplay';
 //must extend React.Component
 class App extends React.Component {
   // initialize state with object
-  state = { latitude: null, errorMessage: '' };
+  state = { lat: null, error: '' };
 
   // good place to load data
   componentDidMount() {
@@ -14,25 +14,25 @@ class App extends React.Component {
     window.navigator.geolocation.getCurrentPosition(
       // setState must be called to update state after initialization
       // on success
-      (position) => this.setState({ latitude: position.coords.latitude }),
+      (position) => this.setState({ lat: position.coords.latitude }),
 
       // on failure
-      (err) => this.setState({ errorMessage: err.message })
+      (err) => this.setState({ error: err.message })
     );
   }
 
   // render must be defined in React class
   render() {
-    var lat = this.state.latitude;
-    var error = this.state.errorMessage;
+    const lat = this.state.lat;
+    const err = this.state.error;
 
-    if(!lat && error) {
-      return <div>Error: {error}</div>
+    if(!lat && err) {
+      return <div>Error: {err}</div>
     }
 
-    if(lat && !error) {
-      // passing state as a prop changes child state
-      return <SeasonDisplay latitude={lat} />
+    if(lat && !err) {
+      // passing state as a prop changes child state, too
+      return <SeasonDisplay lat={lat} />
     }
 
     return <div>Loading...</div>
